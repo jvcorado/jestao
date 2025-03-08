@@ -44,7 +44,7 @@ export default function UserRegister({
   return (
     <>
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerContent className="px-4 rounded-t-3xl bg-white  min-h-[95vh] max-h-screen ">
+        <DrawerContent className="px-4 rounded-t-3xl bg-white  h-[90vh]  ">
           <DrawerHeader className="text-center">
             <DrawerTitle className="text-2xl font-bold">
               Write your name

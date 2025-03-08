@@ -11,7 +11,7 @@ export default function Start() {
   const [isOpenUser, setIsOpenUser] = useState(false);
 
   return (
-    <div className="container mx-auto min-h-screen items-center flex flex-col justify-center gap-4 p-6 ">
+    <div className="container mx-auto h-screen items-center flex flex-col justify-center gap-4 p-6 ">
       <Image src={start} alt="image" className="w-[250px]" />
       <h1 className="text-4xl font-bold text-center">
         The only expense-splitting app <br /> you’ll ever need

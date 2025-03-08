@@ -23,7 +23,7 @@ export default function Home() {
   const visibleExpenses = showAll ? expenses : expenses.slice(0, 3);
 
   return (
-    <div className="container mx-auto min-h-screen md:justify-center flex flex-col gap-4 p-6 md:max-w-[500px]">
+    <div className="container mx-auto h-full md:justify-center flex flex-col gap-4 p-6 md:max-w-[500px]">
       <div className="flex flex-col gap-4 ">
         <h1 className="text-4xl md:text-5xl font-bold md:mb-6">
           Hi {username}, <br /> How can I help <br /> you today?
