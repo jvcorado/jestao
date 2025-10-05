@@ -70,7 +70,7 @@ const darkColors = {
   expenseCard: "#2A2A2A",
   friendsCard: "#2A2A2A",
   historyCard: "#2A2A2A",
-  logoutButton: "#C8F05B",
+  logoutButton: "#FA483A",
   saveButton: "#4CAF50",
   moonIcon: "#FFD700",
   divideIcon: "#DEF3FA",

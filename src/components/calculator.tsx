@@ -206,8 +206,8 @@ export default function ExpenseCalculator({
               variant={"outline"}
               className="h-16 transition-all duration-500 col-span-2 cursor-pointer"
               style={{
-                backgroundColor: colors.logoutButton,
-                borderColor: colors.logoutButton,
+                backgroundColor: colors.primary,
+                borderColor: colors.primary,
                 color: "#000000",
               }}
               onClick={handleSave}

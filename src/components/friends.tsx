@@ -74,8 +74,8 @@ export default function FriendRegister({
               }}
               className="duration-500 transition-all h-10"
               style={{
-                backgroundColor: colors.logoutButton,
-                borderColor: colors.logoutButton,
+                backgroundColor: colors.primary,
+                borderColor: colors.primary,
                 color: "#000000",
               }}
             >
@@ -114,8 +114,8 @@ export default function FriendRegister({
               onClick={() => router.push("/home")}
               className="text-base cursor-pointer mx-auto w-full h-14 transition-all duration-500"
               style={{
-                backgroundColor: colors.logoutButton,
-                borderColor: colors.logoutButton,
+                backgroundColor: colors.primary,
+                borderColor: colors.primary,
                 color: "#000000",
               }}
             >
@@ -128,8 +128,8 @@ export default function FriendRegister({
               onClick={() => setIsOpen(!isOpen)}
               className="text-base cursor-pointer mx-auto w-full h-14 transition-all duration-500"
               style={{
-                backgroundColor: colors.logoutButton,
-                borderColor: colors.logoutButton,
+                backgroundColor: colors.primary,
+                borderColor: colors.primary,
                 color: "#000000",
               }}
             >

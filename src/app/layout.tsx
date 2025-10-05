@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="font-poppins antialiased">
+      <body className={`font-poppins antialiased bg-background `}>
         <ThemeProvider>
           <UserProvider>
             <FriendsProvider>

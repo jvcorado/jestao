@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen flex flex-col justify-center items-center px-6 py-16 relative"
+      className="h-screen flex flex-col justify-center items-center px-6 py-16 relative"
       style={{ backgroundColor: colors.background }}
     >
       {/* Botão no topo direito */}
@@ -30,7 +30,7 @@ export default function Home() {
         <Moon size={24} color={colors.moonIcon} />
       </button>
 
-      <div className="flex flex-col items-center gap-16 max-w-md w-full">
+      <div className="flex flex-col items-center gap-8 max-w-md w-full">
         {/* Logo centralizado */}
         <div className="flex justify-center items-center">
           <Image

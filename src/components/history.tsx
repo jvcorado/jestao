@@ -167,8 +167,8 @@ export default function HistoryDrawer({
                 variant={"link"}
                 className="mt-4 w-full border py-2 rounded-md uppercase font-bold"
                 style={{
-                  backgroundColor: colors.logoutButton,
-                  borderColor: colors.logoutButton,
+                  backgroundColor: colors.primary,
+                  borderColor: colors.primary,
                   color: "#000000",
                 }}
                 onClick={clearHistory}

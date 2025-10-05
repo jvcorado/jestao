@@ -186,8 +186,8 @@ export default function DivideDrawer({
               variant={"outline"}
               className="mt-4 w-full"
               style={{
-                backgroundColor: colors.logoutButton,
-                borderColor: colors.logoutButton,
+                backgroundColor: colors.primary,
+                borderColor: colors.primary,
                 color: "#000000",
               }}
               onClick={handleDone}
