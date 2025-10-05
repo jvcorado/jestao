@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Drawer,
   DrawerContent,
@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useUser } from "@/app/context/userContext";
+import { useTheme } from "@/app/context/themeContext";
 import FriendRegister from "./friends";
 import { toast } from "sonner";
 
@@ -24,6 +25,7 @@ export default function UserRegister({
   const [isOpenFriend, setIsOpenFriend] = useState(false);
 
   const { setUser } = useUser();
+  const { colors } = useTheme();
   const [userData, setUserData] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +34,7 @@ export default function UserRegister({
 
   const handleNext = () => {
     if (!userData.trim()) {
-      toast.error("Please enter your name before proceeding.", {
+      toast.error("Por favor, digite seu nome antes de continuar.", {
         position: "top-right",
       });
       return;
@@ -44,19 +46,35 @@ export default function UserRegister({
   return (
     <>
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerContent className="px-4 rounded-t-3xl bg-white  h-[90vh]  ">
+        <DrawerContent
+          className="px-4 rounded-t-3xl h-[90vh]"
+          style={{ backgroundColor: colors.background }}
+        >
           <DrawerHeader className="text-center">
-            <DrawerTitle className="text-2xl font-bold">
-              Write your name
+            <DrawerTitle
+              className="text-2xl font-bold"
+              style={{ color: colors.text }}
+            >
+              Digite seu nome
             </DrawerTitle>
-            <DrawerDescription>Enter your name to continue</DrawerDescription>
+            <DrawerDescription style={{ color: colors.textSecondary }}>
+              Digite seu nome para continuar
+            </DrawerDescription>
           </DrawerHeader>
-          <div className="p-4 space-y-4 flex flex-col  md:w-[500px] mx-auto">
+          <div
+            className="p-4 space-y-4 flex flex-col md:w-[500px] mx-auto"
+            style={{ backgroundColor: colors.background }}
+          >
             <Input
               type="text"
               name="name"
-              className="h-10 rounded-md"
-              placeholder="Full Name"
+              className="h-10 rounded-md w-full"
+              placeholder="Nome completo"
+              style={{
+                backgroundColor: colors.surface,
+                borderColor: colors.border,
+                color: colors.text,
+              }}
               value={userData}
               onChange={handleChange}
             />
@@ -65,9 +83,14 @@ export default function UserRegister({
               type="button"
               variant={"outline"}
               onClick={handleNext}
-              className="text-base cursor-pointer mx-auto bg-black w-full h-14 transition-all duration-500 text-white"
+              className="text-base cursor-pointer mx-auto w-full h-14 transition-all duration-500"
+              style={{
+                backgroundColor: colors.logoutButton,
+                borderColor: colors.logoutButton,
+                color: "#000000",
+              }}
             >
-              Next
+              Próximo
             </Button>
           </div>
         </DrawerContent>

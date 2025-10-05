@@ -4,14 +4,18 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import { FriendsProvider } from "./context/friendContext";
 import { ExpensesProvider } from "./context/expenseContext";
-import Head from "next/head";
 import { HistoryProvider } from "./context/historyContext";
 import { UserProvider } from "./context/userContext";
+import { ThemeProvider } from "./context/themeContext";
 
 export const metadata: Metadata = {
-  title: "Jestão",
-  description:
-    "Easily split expenses with friends in a simple and transparent way, hassle-free.",
+  title: "Rachô",
+  description: "Menos cálculos e mais diversão.",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -20,19 +24,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+    <html lang="pt-BR">
       <body className="font-poppins antialiased">
-        <UserProvider>
-          <FriendsProvider>
-            <HistoryProvider>
-              <Toaster />
-              <ExpensesProvider>{children}</ExpensesProvider>
-            </HistoryProvider>
-          </FriendsProvider>
-        </UserProvider>
+        <ThemeProvider>
+          <UserProvider>
+            <FriendsProvider>
+              <HistoryProvider>
+                <Toaster />
+                <ExpensesProvider>{children}</ExpensesProvider>
+              </HistoryProvider>
+            </FriendsProvider>
+          </UserProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

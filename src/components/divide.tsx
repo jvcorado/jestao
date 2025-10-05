@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Drawer,
   DrawerContent,
@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { useFriends } from "@/app/context/friendContext";
 import { Expense, useExpenses } from "@/app/context/expenseContext";
 import { useHistory } from "@/app/context/historyContext";
+import { useTheme } from "@/app/context/themeContext";
 
 export default function DivideDrawer({
   isOpen,
@@ -23,6 +24,7 @@ export default function DivideDrawer({
   const { splitExpenses, totalExpenses, expenses, setExpenses } = useExpenses();
   const { friends, clear } = useFriends();
   const { history, addHistoryEntry } = useHistory();
+  const { colors } = useTheme();
 
   const [splitResult, setSplitResult] = useState<{
     owes: Record<string, number>;
@@ -86,65 +88,95 @@ export default function DivideDrawer({
 
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
-      <DrawerContent className="px-4 rounded-t-3xl pb-4 bg-white h-[90vh]">
+      <DrawerContent
+        className="px-4 rounded-t-3xl pb-4 h-[90vh]"
+        style={{ backgroundColor: colors.background }}
+      >
         <DrawerHeader className="text-center">
-          <DrawerTitle className="text-2xl font-bold">
-            Expense Split
+          <DrawerTitle
+            className="text-2xl font-bold"
+            style={{ color: colors.text }}
+          >
+            Divisão de Gastos
           </DrawerTitle>
-          <DrawerDescription>
-            See how the costs are divided among your friends
+          <DrawerDescription style={{ color: colors.textSecondary }}>
+            Veja como os custos são divididos entre seus amigos
           </DrawerDescription>
         </DrawerHeader>
 
         {expenses.length === 0 && (
-          <div className="col-span-2 text-center text-gray-500">
-            No expenses saved
+          <div
+            className="col-span-2 text-center"
+            style={{ color: colors.textSecondary }}
+          >
+            Nenhum gasto salvo
           </div>
         )}
 
         {splitResult && expenses.length > 0 && (
-          <div className="mt-4 p-4 border rounded-md bg-gray-100 md:w-[500px] mx-auto">
-            <h3 className="font-bold text-lg mb-2">Split Summary</h3>
+          <div
+            className="mt-4 p-4 border rounded-md md:w-[500px] mx-auto"
+            style={{
+              backgroundColor: colors.surface,
+              borderColor: colors.border,
+            }}
+          >
+            <h3
+              className="font-bold text-lg mb-2"
+              style={{ color: colors.text }}
+            >
+              Resumo da Divisão
+            </h3>
 
-            <h4 className="font-semibold">Total Expenses:</h4>
-            <p className="ml-4 mb-2">
-              <strong>$ {totalExpenses.toFixed(2)}</strong>
+            <h4 className="font-semibold" style={{ color: colors.text }}>
+              Total de Gastos:
+            </h4>
+            <p className="ml-4 mb-2" style={{ color: colors.text }}>
+              <strong>R$ {totalExpenses.toFixed(2)}</strong>
             </p>
 
-            <h4 className="font-semibold">Amount per Person:</h4>
-            <p className="ml-4 mb-4">
+            <h4 className="font-semibold" style={{ color: colors.text }}>
+              Valor por Pessoa:
+            </h4>
+            <p className="ml-4 mb-4" style={{ color: colors.text }}>
               <strong>
-                ${" "}
+                R${" "}
                 {friends.length > 0
                   ? (totalExpenses / friends.length).toFixed(2)
                   : "0.00"}
               </strong>
             </p>
 
-            <h4 className="font-semibold">Who Needs to Pay:</h4>
+            <h4 className="font-semibold" style={{ color: colors.text }}>
+              Quem Precisa Pagar:
+            </h4>
             <ul className="mb-4">
               {Object.entries(splitResult.owes).map(([name, amount]) => (
-                <li key={name} className="ml-4">
-                  {name} owes <strong>$ {amount.toFixed(2)}</strong>
+                <li key={name} className="ml-4" style={{ color: colors.text }}>
+                  {name} deve <strong>R$ {amount.toFixed(2)}</strong>
                 </li>
               ))}
             </ul>
 
-            <h4 className="font-semibold">Who Will Receive:</h4>
+            <h4 className="font-semibold" style={{ color: colors.text }}>
+              Quem Vai Receber:
+            </h4>
             <ul className="mb-4">
               {Object.entries(splitResult.receives).map(([name, amount]) => (
-                <li key={name} className="ml-4">
-                  {name} will receive <strong>$ {amount.toFixed(2)}</strong>
+                <li key={name} className="ml-4" style={{ color: colors.text }}>
+                  {name} vai receber <strong>R$ {amount.toFixed(2)}</strong>
                 </li>
               ))}
             </ul>
 
-            <h4 className="font-semibold">Suggested Payments:</h4>
+            <h4 className="font-semibold" style={{ color: colors.text }}>
+              Pagamentos Sugeridos:
+            </h4>
             <ul>
               {splitResult.transactions.map((transaction, index) => (
-                <li key={index} className="ml-4">
-                  <strong>{transaction.from}</strong> should pay{" "}
-                  <strong>$ {transaction.amount.toFixed(2)}</strong> to{" "}
+                <li key={index} className="ml-4" style={{ color: colors.text }}>
+                  <strong>{transaction.from}</strong> deve pagar{" "}
+                  <strong>R$ {transaction.amount.toFixed(2)}</strong> para{" "}
                   <strong>{transaction.to}</strong>
                 </li>
               ))}
@@ -153,9 +185,14 @@ export default function DivideDrawer({
             <Button
               variant={"outline"}
               className="mt-4 w-full"
+              style={{
+                backgroundColor: colors.logoutButton,
+                borderColor: colors.logoutButton,
+                color: "#000000",
+              }}
               onClick={handleDone}
             >
-              Done
+              Concluído
             </Button>
           </div>
         )}

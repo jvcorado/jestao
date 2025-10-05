@@ -6,6 +6,7 @@ interface UserContextType {
   id: number | null;
   username: string | null;
   setUser: (name: string) => void;
+  logout: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -39,9 +40,17 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     setUserState((prev) => ({ ...prev, username: name }));
   };
 
+  const logout = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("userId");
+      localStorage.removeItem("username");
+    }
+    setUserState({ id: null, username: null });
+  };
+
   return (
     <UserContext.Provider
-      value={{ id: user.id, username: user.username, setUser }}
+      value={{ id: user.id, username: user.username, setUser, logout }}
     >
       {children}
     </UserContext.Provider>

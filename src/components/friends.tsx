@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Drawer,
   DrawerContent,
@@ -14,6 +14,7 @@ import { Trash } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useFriends } from "@/app/context/friendContext";
 import { useUser } from "@/app/context/userContext";
+import { useTheme } from "@/app/context/themeContext";
 
 export default function FriendRegister({
   isOpen,
@@ -25,26 +26,43 @@ export default function FriendRegister({
   const { friends, addFriend, removeFriend } = useFriends();
   const [newFriend, setNewFriend] = useState("");
   const { username } = useUser();
+  const { colors } = useTheme();
 
   const router = useRouter();
   const pathName = usePathname();
 
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
-      <DrawerContent className="px-4 rounded-t-3xl bg-white h-[90vh]">
-        <div className="overflow-y-auto max-h-[75vh] pb-4 space-y-4 md:w-[500px] md:mx-auto  rounded-xl p-4">
+      <DrawerContent
+        className="px-4 rounded-t-3xl h-[90vh]"
+        style={{ backgroundColor: colors.background }}
+      >
+        <div
+          className="overflow-y-auto max-h-[75vh] pb-4 space-y-4 md:w-[500px] md:mx-auto rounded-xl p-4"
+          style={{ backgroundColor: colors.background }}
+        >
           <DrawerHeader className="text-center">
-            <DrawerTitle className="text-2xl font-bold">
-              Friends List
+            <DrawerTitle
+              className="text-2xl font-bold"
+              style={{ color: colors.text }}
+            >
+              Lista de Amigos
             </DrawerTitle>
-            <DrawerDescription>Manage your friends</DrawerDescription>
+            <DrawerDescription style={{ color: colors.textSecondary }}>
+              Gerencie seus amigos
+            </DrawerDescription>
           </DrawerHeader>
 
           <div className="flex space-x-2">
             <Input
               type="text"
-              className="h-10 rounded-md"
-              placeholder="Enter a friend's name"
+              className="h-10 rounded-md flex-1"
+              placeholder="Digite o nome do amigo"
+              style={{
+                backgroundColor: colors.surface,
+                borderColor: colors.border,
+                color: colors.text,
+              }}
               value={newFriend}
               onChange={(e) => setNewFriend(e.target.value)}
             />
@@ -54,9 +72,14 @@ export default function FriendRegister({
                 addFriend(newFriend);
                 setNewFriend("");
               }}
-              className="duration-500 transition-all h-10 bg-black text-white"
+              className="duration-500 transition-all h-10"
+              style={{
+                backgroundColor: colors.logoutButton,
+                borderColor: colors.logoutButton,
+                color: "#000000",
+              }}
             >
-              Add
+              Adicionar
             </Button>
           </div>
 
@@ -66,12 +89,17 @@ export default function FriendRegister({
               .map((friend, index) => (
                 <li
                   key={index}
-                  className="flex justify-between items-center bg-white border p-2 rounded-md"
+                  className="flex justify-between items-center border p-2 rounded-md"
+                  style={{
+                    backgroundColor: colors.surface,
+                    borderColor: colors.border,
+                  }}
                 >
-                  <span>{friend.name}</span>
+                  <span style={{ color: colors.text }}>{friend.name}</span>
                   <Button
                     variant="ghost"
                     onClick={() => removeFriend(friend.id)}
+                    style={{ color: colors.text }}
                   >
                     <Trash className="w-4 h-4 text-red-500" />
                   </Button>
@@ -84,18 +112,28 @@ export default function FriendRegister({
               type="button"
               variant="outline"
               onClick={() => router.push("/home")}
-              className="text-base cursor-pointer mx-auto bg-black w-full h-14 transition-all duration-500 text-white"
+              className="text-base cursor-pointer mx-auto w-full h-14 transition-all duration-500"
+              style={{
+                backgroundColor: colors.logoutButton,
+                borderColor: colors.logoutButton,
+                color: "#000000",
+              }}
             >
-              Next
+              Próximo
             </Button>
           ) : (
             <Button
               type="button"
               variant="outline"
               onClick={() => setIsOpen(!isOpen)}
-              className="text-base cursor-pointer mx-auto bg-black w-full h-14 transition-all duration-500 text-white"
+              className="text-base cursor-pointer mx-auto w-full h-14 transition-all duration-500"
+              style={{
+                backgroundColor: colors.logoutButton,
+                borderColor: colors.logoutButton,
+                color: "#000000",
+              }}
             >
-              Close
+              Próximo
             </Button>
           )}
         </div>

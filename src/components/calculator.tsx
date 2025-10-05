@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Drawer,
   DrawerContent,
@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { ItemType, useFriends } from "@/app/context/friendContext";
 import { useExpenses } from "@/app/context/expenseContext";
+import { useTheme } from "@/app/context/themeContext";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
@@ -30,6 +31,7 @@ export default function ExpenseCalculator({
 }) {
   const { addExpense } = useExpenses();
   const { friends } = useFriends();
+  const { colors } = useTheme();
   const [amount, setAmount] = useState("0");
   const [description, setDescription] = useState("");
   const [selectedFriend, setSelectedFriend] = useState<ItemType | null>(null);
@@ -49,7 +51,7 @@ export default function ExpenseCalculator({
   const handleSave = () => {
     if (!selectedFriend || description.trim() === "") {
       toast.error(
-        "Please select a friend and enter a description before saving.",
+        "Por favor, selecione um amigo e digite uma descrição antes de salvar.",
         {
           position: "top-right",
         }
@@ -73,12 +75,23 @@ export default function ExpenseCalculator({
 
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
-      <DrawerContent className="px-4 rounded-t-3xl bg-white h-[90vh]">
-        <div className="overflow-y-auto max-h-[75vh] pb-4 space-y-4 md:w-[500px] md:mx-auto  rounded-xl p-4">
+      <DrawerContent
+        className="px-4 rounded-t-3xl h-[90vh]"
+        style={{ backgroundColor: colors.background }}
+      >
+        <div
+          className="overflow-y-auto max-h-[75vh] pb-4 space-y-4 md:w-[500px] md:mx-auto rounded-xl p-4"
+          style={{ backgroundColor: colors.background }}
+        >
           <DrawerHeader className="text-center">
-            <DrawerTitle className="text-2xl font-bold">Expenses</DrawerTitle>
-            <DrawerDescription>
-              Enter your expense amount, description, and select a friend
+            <DrawerTitle
+              className="text-2xl font-bold"
+              style={{ color: colors.text }}
+            >
+              Gastos
+            </DrawerTitle>
+            <DrawerDescription style={{ color: colors.textSecondary }}>
+              Digite o valor do gasto, descrição e selecione um amigo
             </DrawerDescription>
           </DrawerHeader>
 
@@ -89,14 +102,31 @@ export default function ExpenseCalculator({
               )
             }
           >
-            <SelectTrigger className="w-full p-2 h-12 border rounded-md">
-              <SelectValue placeholder="Select buyer" />
+            <SelectTrigger
+              className="w-full p-2 h-12 border rounded-md"
+              style={{
+                backgroundColor: colors.surface,
+                borderColor: colors.border,
+                color: colors.text,
+              }}
+            >
+              <SelectValue
+                placeholder="Selecionar comprador"
+                style={{ color: colors.text }}
+              />
             </SelectTrigger>
-            <SelectContent className="bg-white">
+            <SelectContent
+              style={{
+                backgroundColor: colors.surface,
+                borderColor: colors.border,
+              }}
+            >
               {friends.map((item) => (
-                <SelectItem key={item.id} value={String(item.id)}>
-                  {" "}
-                  {/* Converte o id para string */}
+                <SelectItem
+                  key={item.id}
+                  value={String(item.id)}
+                  style={{ color: colors.text }}
+                >
                   {item.name}
                 </SelectItem>
               ))}
@@ -105,14 +135,26 @@ export default function ExpenseCalculator({
 
           <Input
             type="text"
-            placeholder="Enter description"
+            placeholder="Digite a descrição"
             className="w-full p-2 border h-12 rounded-md"
+            style={{
+              backgroundColor: colors.surface,
+              borderColor: colors.border,
+              color: colors.text,
+            }}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <div className="text-center text-4xl font-bold border p-4 rounded-2xl">
-            ${amount}
+          <div
+            className="text-center text-4xl font-bold border p-4 rounded-2xl"
+            style={{
+              backgroundColor: colors.surface,
+              borderColor: colors.border,
+              color: colors.text,
+            }}
+          >
+            R${amount}
           </div>
 
           <div className="grid grid-cols-3 gap-4">
@@ -122,9 +164,14 @@ export default function ExpenseCalculator({
                   key={num}
                   variant={"outline"}
                   className={cn(
-                    "h-16 text-xl cursor-pointer",
-                    num === "," && "bg-gray-100 transition-all duration-500"
+                    "h-16 text-xl cursor-pointer transition-all duration-500"
                   )}
+                  style={{
+                    backgroundColor:
+                      num === "," ? colors.surface : colors.buttonBackground,
+                    borderColor: colors.border,
+                    color: colors.text,
+                  }}
                   onClick={() => handleNumberClick(num)}
                 >
                   {num}
@@ -132,25 +179,40 @@ export default function ExpenseCalculator({
               )
             )}
             <Button
-              className="h-16 transition-all duration-500 cursor-pointer bg-red-600"
+              className="h-16 transition-all duration-500 cursor-pointer"
               variant={"outline"}
+              style={{
+                backgroundColor: "#dc2626",
+                borderColor: "#dc2626",
+                color: "#000000",
+              }}
               onClick={handleDelete}
             >
               <Delete color="white" />
             </Button>
             <Button
               variant={"outline"}
-              className="h-16 transition-all duration-500 cursor-pointer bg-gray-200"
+              className="h-16 transition-all duration-500 cursor-pointer"
+              style={{
+                backgroundColor: colors.surface,
+                borderColor: colors.border,
+                color: colors.text,
+              }}
               onClick={handleClear}
             >
-              Clear
+              Limpar
             </Button>
             <Button
               variant={"outline"}
-              className="h-16 transition-all duration-500 col-span-2 cursor-pointer bg-black text-white"
+              className="h-16 transition-all duration-500 col-span-2 cursor-pointer"
+              style={{
+                backgroundColor: colors.logoutButton,
+                borderColor: colors.logoutButton,
+                color: "#000000",
+              }}
               onClick={handleSave}
             >
-              Save
+              Salvar
             </Button>
           </div>
         </div>
