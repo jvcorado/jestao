@@ -85,8 +85,8 @@ export default function UserRegister({
               onClick={handleNext}
               className="text-base cursor-pointer mx-auto w-full h-14 transition-all duration-500"
               style={{
-                backgroundColor: colors.logoutButton,
-                borderColor: colors.logoutButton,
+                backgroundColor: colors.primary,
+                borderColor: colors.primary,
                 color: "#000000",
               }}
             >

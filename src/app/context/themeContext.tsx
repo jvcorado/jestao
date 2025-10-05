@@ -44,7 +44,7 @@ const lightColors = {
   expenseCard: "#f0afab",
   friendsCard: "#E1F7DD",
   historyCard: "#FFF5C0",
-  logoutButton: "#C8F05B",
+  logoutButton: "#FA483A",
   saveButton: "#4CAF50",
   moonIcon: "#DADADA",
   divideIcon: "#000000",

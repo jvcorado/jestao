@@ -4,14 +4,14 @@ import Image from "next/image";
 import start from "../../../public/images/logo_name.svg";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Calculator, Users, DollarSign, Moon } from "lucide-react";
+import { Calculator, Users, DollarSign } from "lucide-react";
 import { useTheme } from "../context/themeContext";
 
 import UserRegister from "@/components/user";
 
 export default function Home() {
   const [isOpenUser, setIsOpenUser] = useState(false);
-  const { colors, toggleTheme } = useTheme();
+  const { colors } = useTheme();
 
   return (
     <div
@@ -19,7 +19,7 @@ export default function Home() {
       style={{ backgroundColor: colors.background }}
     >
       {/* Botão no topo direito */}
-      <button
+      {/* <button
         onClick={toggleTheme}
         className="absolute top-6 right-6 w-11 h-11 rounded-2xl border flex items-center justify-center z-10"
         style={{
@@ -28,7 +28,7 @@ export default function Home() {
         }}
       >
         <Moon size={24} color={colors.moonIcon} />
-      </button>
+      </button> */}
 
       <div className="flex flex-col items-center gap-8 max-w-md w-full">
         {/* Logo centralizado */}
